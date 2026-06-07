@@ -5,9 +5,8 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'aum_portal');
 
-// ── Project URL base — space encoded for HTTP Location headers ─
-// Change 'aum%20portal' if you rename or move the folder.
-define('BASE_URL', '/aum%20portal');
+// ── Project URL base — must match the folder name in htdocs exactly ─
+define('BASE_URL', '/Aum-portal');
 
 // ── Upload settings ───────────────────────────────────────────
 define('UPLOAD_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR);
