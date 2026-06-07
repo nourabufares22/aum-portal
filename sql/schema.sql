@@ -1,6 +1,5 @@
 -- ============================================================
 -- AUM E-Portal for Employment — Database Schema
--- Academic Staff Side
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS aum_portal
@@ -114,13 +113,33 @@ CREATE TABLE IF NOT EXISTS applications (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     user_id       INT NOT NULL,
     job_id        INT NOT NULL,
-    status        ENUM('pending','accepted','rejected') NOT NULL DEFAULT 'pending',
+    status        ENUM('pending','under_review','accepted','rejected') NOT NULL DEFAULT 'pending',
     cover_letter  TEXT DEFAULT NULL,
     applied_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE KEY unique_application (user_id, job_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (job_id)  REFERENCES jobs(id)  ON DELETE CASCADE
+);
+
+-- ── Admin Notes ───────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS admin_notes (
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    application_id INT NOT NULL,
+    admin_id       INT NOT NULL,
+    note           TEXT NOT NULL,
+    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE,
+    FOREIGN KEY (admin_id)       REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- ── Default Admin Account ────────────────────────────────────
+-- Password: Admin@AUM2026  (change immediately after first login)
+-- Generate a new hash with: echo password_hash('YourPassword', PASSWORD_BCRYPT);
+INSERT IGNORE INTO users (email, password, role) VALUES (
+    'admin@aum.edu.jo',
+    '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    'admin'
 );
 
 -- ── Sample Job Listings ──────────────────────────────────────
