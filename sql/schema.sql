@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS admin_notes (
 -- Generate a new hash with: echo password_hash('YourPassword', PASSWORD_BCRYPT);
 INSERT IGNORE INTO users (email, password, role) VALUES (
     'admin@aum.edu.jo',
-    '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    '$2y$10$EGDjH2CCLwucZCrSHTm5r.K7.rOV/bYoV9mBipP0GEkVb6H/kpUg.',
     'admin'
 );
 
