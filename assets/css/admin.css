@@ -1,0 +1,144 @@
+/* ============================================================
+   AUM E-Portal — Admin Panel Stylesheet
+   Extends style.css — loaded after it on admin pages only
+   ============================================================ */
+
+/* ── Admin label badge in navbar ──────────────────────────── */
+.admin-label-badge {
+  background:    rgba(151,0,0,.12);
+  color:         var(--primary);
+  font-size:     .7rem;
+  font-weight:   700;
+  padding:       2px 8px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* ── Admin avatar (slightly different shade) ──────────────── */
+.admin-avatar {
+  background: var(--primary-dark);
+}
+
+/* ── Sidebar pending badge ────────────────────────────────── */
+.sidebar-badge {
+  background:    #fff;
+  color:         var(--primary);
+  font-size:     .7rem;
+  font-weight:   700;
+  padding:       1px 7px;
+  border-radius: 50px;
+  margin-left:   auto;
+  min-width:     22px;
+  text-align:    center;
+}
+
+/* ── Admin table ──────────────────────────────────────────── */
+.admin-table thead th {
+  background:    #f8f9fa;
+  font-size:     .78rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color:         #6c757d;
+  font-weight:   600;
+  white-space:   nowrap;
+}
+.admin-table tbody tr:hover { background: rgba(151,0,0,.03); }
+.admin-table td { font-size: .875rem; vertical-align: middle; }
+
+/* ── Mini avatar for table rows ──────────────────────────── */
+.mini-avatar {
+  width:           34px; height: 34px;
+  border-radius:   50%;
+  background:      var(--primary-faint);
+  color:           var(--primary);
+  font-weight:     700;
+  font-size:       .9rem;
+  display:         flex; align-items: center; justify-content: center;
+  flex-shrink:     0;
+}
+
+/* ── Pagination ───────────────────────────────────────────── */
+.page-item.active .page-link { background: var(--primary); border-color: var(--primary); }
+.page-link { color: var(--primary); }
+.page-link:hover { color: var(--primary-dark); }
+
+/* ── Application view — big avatar ───────────────────────── */
+.app-big-avatar {
+  width:           64px; height: 64px;
+  border-radius:   50%;
+  background:      var(--primary);
+  color:           #fff;
+  font-size:       1.6rem;
+  font-weight:     700;
+  display:         flex; align-items: center; justify-content: center;
+  flex-shrink:     0;
+}
+
+/* ── Admin note items ─────────────────────────────────────── */
+.admin-note-item {
+  background:    #f8f9fa;
+  border-left:   3px solid var(--primary);
+  border-radius: 0 8px 8px 0;
+  padding:       10px 14px;
+  margin-bottom: 10px;
+}
+.admin-note-item:last-child { margin-bottom: 0; }
+
+/* ── Reports page ─────────────────────────────────────────── */
+.report-card {
+  page-break-inside: avoid;
+}
+
+.accepted-rejected-box {
+  border-radius: 12px;
+  padding:       20px 12px;
+}
+.accepted-box {
+  background: rgba(5,122,85,.08);
+  border:     1px solid rgba(5,122,85,.2);
+}
+.rejected-box {
+  background: rgba(151,0,0,.06);
+  border:     1px solid rgba(151,0,0,.15);
+}
+.arb-value { font-size: 2rem; font-weight: 700; line-height: 1; }
+.arb-label { font-size: .8rem; color: #6c757d; margin-top: 4px; }
+.accepted-box .arb-value { color: #057a55; }
+.rejected-box .arb-value { color: var(--primary); }
+
+/* ── Print styles ─────────────────────────────────────────── */
+@media print {
+  .sidebar, .top-navbar, .btn, .page-header > div:last-child,
+  .card-header-custom a, .admin-scripts { display: none !important; }
+
+  .main-content { margin-left: 0 !important; }
+  .content-area { padding: 0 !important; }
+
+  .card {
+    border: 1px solid #dee2e6 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  .card-header-custom {
+    background:   #970000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .report-card { break-inside: avoid; }
+  body { background: #fff !important; }
+
+  .page-header h5::after {
+    content: " — American University of Madaba";
+    font-size: .85rem;
+    font-weight: 400;
+    color: #6c757d;
+  }
+}
+
+/* ── Responsive adjustments ───────────────────────────────── */
+@media (max-width: 767.98px) {
+  .app-big-avatar { width: 48px; height: 48px; font-size: 1.2rem; }
+  .arb-value { font-size: 1.5rem; }
+}

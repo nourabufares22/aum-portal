@@ -1,0 +1,14 @@
+# Prevent execution of PHP scripts in uploads directory
+<FilesMatch "\.php[0-9]?$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes
+
+# Only allow specific file types to be served
+<FilesMatch "\.(pdf|doc|docx|jpg|jpeg|png)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
