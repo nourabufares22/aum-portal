@@ -1,5 +1,5 @@
--- ============================================================
--- AUM E-Portal for Employment — Database Schema
+﻿-- ============================================================
+-- AUM E-Portal for Employment - Database Schema
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS aum_portal
@@ -145,35 +145,35 @@ INSERT IGNORE INTO users (email, password, role) VALUES (
 -- ── Sample Job Listings ──────────────────────────────────────
 INSERT INTO jobs (title, department, description, requirements, deadline, status) VALUES
 (
-    'Assistant Professor — Computer Science',
+    'Assistant Professor - Computer Science',
     'Computer Science',
     'We are seeking a motivated and qualified Assistant Professor to join our Computer Science department. The successful candidate will teach undergraduate and graduate courses, conduct research, and contribute to departmental activities.',
     'PhD in Computer Science or related field\nMinimum 2 years of teaching experience\nStrong research background with publications in peer-reviewed journals\nExcellent communication and leadership skills',
     '2026-12-31', 'active'
 ),
 (
-    'Lecturer — Mathematics & Statistics',
+    'Lecturer - Mathematics & Statistics',
     'Mathematics',
     'The Department of Mathematics is looking for an experienced Lecturer to teach undergraduate mathematics and statistics courses, including calculus, linear algebra, and probability.',
     'Masters or PhD in Mathematics or Statistics\nTeaching experience at university level\nStrong communication and interpersonal skills\nAbility to work collaboratively in a multicultural environment',
     '2026-11-30', 'active'
 ),
 (
-    'Associate Professor — Business Administration',
+    'Associate Professor - Business Administration',
     'Business Administration',
     'Join our dynamic Business Administration department as an Associate Professor. You will lead courses in management, strategy, and organizational behavior, and contribute to program accreditation efforts.',
     'PhD in Business Administration or related field\nMinimum 5 years academic experience\nStrong record of research publications\nIndustry experience preferred',
     '2026-10-31', 'active'
 ),
 (
-    'Assistant Professor — English Language',
+    'Assistant Professor - English Language',
     'Languages & Translation',
     'We seek a passionate educator for our English Language program. The role involves curriculum development, teaching ESL and academic writing courses, and supervising student research.',
     'PhD in English, Linguistics, or TESOL\nExperience in curriculum design\nStrong academic writing and research skills\nTESOL/TEFL certification preferred',
     '2026-09-30', 'active'
 ),
 (
-    'Research Fellow — Engineering',
+    'Research Fellow - Engineering',
     'Engineering',
     'An exciting opportunity for a Research Fellow to join our Engineering faculty. The role focuses on applied research projects and collaboration with industry partners on sustainable technology.',
     'PhD in Engineering (any discipline)\nResearch experience with funding track record\nStrong publication portfolio\nProject management and grant-writing skills',
