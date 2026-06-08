@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 
@@ -46,7 +46,7 @@ $flash = getFlash();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — AUM E-Portal</title>
+    <title>Login - AUM E-Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -60,7 +60,7 @@ $flash = getFlash();
         <div class="auth-panel-content">
             <div class="auth-panel-logo">AUM</div>
             <h1>American University of Madaba</h1>
-            <p>E-Portal for Employment — Academic Staff</p>
+            <p>E-Portal for Employment - Academic Staff</p>
             <ul class="auth-features">
                 <li><i class="bi bi-check-circle-fill"></i> Manage your academic profile</li>
                 <li><i class="bi bi-check-circle-fill"></i> Track publications & qualifications</li>

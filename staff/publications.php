@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'Publications';
 $userId    = getCurrentUserId();
 
-// ── CRUD ──────────────────────────────────────────────────────
+// -- CRUD ------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Fetch ─────────────────────────────────────────────────────
+// -- Fetch -----------------------------------------------------
 $stmt = $pdo->prepare('SELECT * FROM publications WHERE user_id=? ORDER BY publication_year DESC');
 $stmt->execute([$userId]);
 $publications = $stmt->fetchAll();
@@ -113,7 +113,7 @@ $currentYear  = (int)date('Y');
                                     </td>
                                     <td><?= e($p['journal']) ?></td>
                                     <td><span class="badge bg-success-subtle text-success"><?= e($p['publication_year']) ?></span></td>
-                                    <td><?= $p['research_interest'] ? e($p['research_interest']) : '<span class="text-muted">—</span>' ?></td>
+                                    <td><?= $p['research_interest'] ? e($p['research_interest']) : '<span class="text-muted">-</span>' ?></td>
                                     <td class="text-end">
                                         <button class="btn btn-sm btn-outline-secondary me-1"
                                                 onclick="openEdit(<?= htmlspecialchars(json_encode($p), ENT_QUOTES) ?>)">

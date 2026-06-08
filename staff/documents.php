@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'Documents';
 $userId    = getCurrentUserId();
 
-// ── Handle upload ─────────────────────────────────────────────
+// -- Handle upload ---------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     if ($_POST['action'] === 'upload') {
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     exit;
 }
 
-// ── Fetch documents ───────────────────────────────────────────
+// -- Fetch documents -------------------------------------------
 $stmt = $pdo->prepare('SELECT * FROM documents WHERE user_id=? ORDER BY uploaded_at DESC');
 $stmt->execute([$userId]);
 $allDocs = $stmt->fetchAll();
@@ -228,7 +228,7 @@ function fileIcon(string $path): string {
                     <div class="mb-3">
                         <label class="form-label fw-medium">Document Type *</label>
                         <select class="form-select" name="document_type" id="modalDocType" required>
-                            <option value="">— Select Type —</option>
+                            <option value="">- Select Type -</option>
                             <?php foreach ($typeLabels as $val => $lbl): ?>
                             <option value="<?= $val ?>"><?= $lbl ?></option>
                             <?php endforeach; ?>
@@ -238,7 +238,7 @@ function fileIcon(string $path): string {
                         <label class="form-label fw-medium">Select File *</label>
                         <input type="file" class="form-control" name="document" id="fileInput"
                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
-                        <div class="form-text">Max 10 MB — PDF, DOC, DOCX, JPG, PNG</div>
+                        <div class="form-text">Max 10 MB - PDF, DOC, DOCX, JPG, PNG</div>
                     </div>
                     <!-- File preview -->
                     <div id="filePreview" class="d-none">
@@ -246,7 +246,7 @@ function fileIcon(string $path): string {
                             <div class="doc-icon"><i class="bi bi-file-earmark fs-2 text-primary"></i></div>
                             <div class="doc-info">
                                 <p class="doc-name mb-0" id="previewName">filename.pdf</p>
-                                <small class="text-muted" id="previewSize">—</small>
+                                <small class="text-muted" id="previewSize">-</small>
                             </div>
                         </div>
                     </div>

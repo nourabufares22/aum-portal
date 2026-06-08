@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'Job Opportunities';
 $userId    = getCurrentUserId();
 
-// ── Handle application submission ─────────────────────────────
+// -- Handle application submission -----------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apply') {
     $jobId       = (int)($_POST['job_id']      ?? 0);
     $coverLetter = trim($_POST['cover_letter'] ?? '');
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apply
     exit;
 }
 
-// ── Fetch jobs ────────────────────────────────────────────────
+// -- Fetch jobs ------------------------------------------------
 $search = trim($_GET['search'] ?? '');
 $dept   = trim($_GET['dept']   ?? '');
 
@@ -80,7 +80,7 @@ if (!empty($_GET['id'])) {
             <?php displayFlash(); ?>
 
             <?php if ($selectedJob): ?>
-            <!-- ── Job Detail View ──────────────────────────── -->
+            <!-- -- Job Detail View ---------------------------- -->
             <div class="mb-3">
                 <a href="jobs.php" class="btn btn-outline-secondary btn-sm">
                     <i class="bi bi-arrow-left me-1"></i>Back to Job List
@@ -172,7 +172,7 @@ if (!empty($_GET['id'])) {
             </div>
 
             <?php else: ?>
-            <!-- ── Job List View ────────────────────────────── -->
+            <!-- -- Job List View ------------------------------ -->
             <div class="page-header mb-4">
                 <div>
                     <h5 class="mb-1">Job Opportunities</h5>
@@ -262,7 +262,7 @@ if (!empty($_GET['id'])) {
                             </p>
 
                             <p class="text-muted small mb-3">
-                                <?= e(mb_strimwidth($job['description'] ?? '', 0, 120, '…')) ?>
+                                <?= e(mb_strimwidth($job['description'] ?? '', 0, 120, '...')) ?>
                             </p>
 
                             <div class="d-flex justify-content-between align-items-center">

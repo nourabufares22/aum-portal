@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
 // Pending count badge

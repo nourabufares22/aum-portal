@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $_adminId = getAdminId();
 $_stmt = $pdo->prepare('SELECT email FROM users WHERE id = ?');
 $_stmt->execute([$_adminId]);

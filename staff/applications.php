@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'My Applications';
 $userId    = getCurrentUserId();
 
-// ── Handle withdraw ───────────────────────────────────────────
+// -- Handle withdraw -------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'withdraw') {
     $appId = (int)($_POST['id'] ?? 0);
     // Only allow withdrawing pending applications
@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'withd
     if ($stmt->rowCount()) {
         setFlash('success', 'Application withdrawn successfully.');
     } else {
-        setFlash('error', 'Could not withdraw — application may no longer be pending.');
+        setFlash('error', 'Could not withdraw - application may no longer be pending.');
     }
     header('Location: applications.php');
     exit;
 }
 
-// ── Filter ────────────────────────────────────────────────────
+// -- Filter ----------------------------------------------------
 $filterStatus = $_GET['status'] ?? 'all';
 $allowedStatuses = ['all','pending','accepted','rejected'];
 if (!in_array($filterStatus, $allowedStatuses)) $filterStatus = 'all';
@@ -192,7 +192,7 @@ $statusConfig = [
                             <div class="mt-3 pt-3 border-top">
                                 <p class="text-muted small mb-1 fw-medium">Cover Letter:</p>
                                 <p class="text-muted small mb-0 cover-letter-preview">
-                                    <?= e(mb_strimwidth($app['cover_letter'], 0, 200, '…')) ?>
+                                    <?= e(mb_strimwidth($app['cover_letter'], 0, 200, '...')) ?>
                                 </p>
                             </div>
                             <?php endif; ?>

@@ -1,14 +1,14 @@
-<?php
-// ── Database Configuration ────────────────────────────────────
+﻿<?php
+// -- Database Configuration ------------------------------------
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'aum_portal');
 
-// ── Project URL base — must match the folder name in htdocs exactly ─
+// -- Project URL base - must match the folder name in htdocs exactly -
 define('BASE_URL', '/Aum-portal');
 
-// ── Upload settings ───────────────────────────────────────────
+// -- Upload settings -------------------------------------------
 define('UPLOAD_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR);
 define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10 MB
 define('ALLOWED_EXTENSIONS', ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png']);
@@ -20,7 +20,7 @@ define('ALLOWED_MIME_TYPES', [
     'image/png',
 ]);
 
-// ── PDO Connection ────────────────────────────────────────────
+// -- PDO Connection --------------------------------------------
 try {
     $pdo = new PDO(
         'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
@@ -36,7 +36,7 @@ try {
     http_response_code(503);
     die('
     <!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8"><title>Database Error — AUM Portal</title>
+    <meta charset="UTF-8"><title>Database Error - AUM Portal</title>
     <style>
         body{font-family:sans-serif;background:#f4f6f9;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
         .box{background:#fff;border-radius:12px;padding:40px;max-width:500px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -14,7 +14,7 @@ $stmt = $pdo->prepare('SELECT sp.*, u.email
 $stmt->execute([$userId]);
 $profile = $stmt->fetch() ?: [];
 
-// ── Handle form submission ────────────────────────────────────
+// -- Handle form submission ------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fields = [
         'first_name'  => trim($_POST['first_name']  ?? ''),
@@ -128,7 +128,7 @@ $completion = profileCompletion($profile);
                         <div class="profile-detail-row">
                             <i class="bi <?= $d['icon'] ?> text-muted me-2"></i>
                             <span class="text-muted small"><?= $d['label'] ?>:</span>
-                            <span class="ms-auto small"><?= $d['value'] ? e($d['value']) : '<span class="text-muted">—</span>' ?></span>
+                            <span class="ms-auto small"><?= $d['value'] ? e($d['value']) : '<span class="text-muted">-</span>' ?></span>
                         </div>
                         <?php endforeach; ?>
                     </div>
