@@ -11,6 +11,7 @@ $adminNav = [
     ['href'=>'dashboard.php',    'icon'=>'bi-speedometer2',     'label'=>'Dashboard'],
     ['href'=>'applications.php', 'icon'=>'bi-clipboard-data',   'label'=>'Applications',
      'badge'=>$_pendingCount > 0 ? $_pendingCount : null],
+    ['href'=>'jobs.php',         'icon'=>'bi-briefcase',        'label'=>'Job Management'],
     ['href'=>'reports.php',      'icon'=>'bi-bar-chart-line',   'label'=>'Reports & Analytics'],
 ];
 ?>
@@ -44,12 +45,6 @@ $adminNav = [
 
     <div class="sidebar-spacer"></div>
     <div class="sidebar-divider"></div>
-
-    <!-- Back to Staff Portal (if admin is also a staff user) -->
-    <a href="../staff/dashboard.php" class="sidebar-link text-opacity-75">
-        <i class="bi bi-arrow-left-circle"></i>
-        <span>Staff Portal</span>
-    </a>
 
     <a href="../auth/logout.php" class="sidebar-link sidebar-logout">
         <i class="bi bi-box-arrow-right"></i>

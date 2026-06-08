@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'withd
 
 // ── Filter ────────────────────────────────────────────────────
 $filterStatus = $_GET['status'] ?? 'all';
-$allowedStatuses = ['all','pending','accepted','rejected'];
+$allowedStatuses = ['all','pending','under_review','accepted','rejected'];
 if (!in_array($filterStatus, $allowedStatuses)) $filterStatus = 'all';
 
 $sql = 'SELECT a.*, j.title AS job_title, j.department, j.deadline, j.status AS job_status
@@ -44,16 +44,17 @@ $applications = $stmt->fetchAll();
 // Status counts
 $stmt = $pdo->prepare('SELECT status, COUNT(*) AS cnt FROM applications WHERE user_id=? GROUP BY status');
 $stmt->execute([$userId]);
-$counts = ['all'=>0,'pending'=>0,'accepted'=>0,'rejected'=>0];
+$counts = ['all'=>0,'pending'=>0,'under_review'=>0,'accepted'=>0,'rejected'=>0];
 foreach ($stmt->fetchAll() as $r) {
     $counts[$r['status']] = (int)$r['cnt'];
     $counts['all'] += (int)$r['cnt'];
 }
 
 $statusConfig = [
-    'pending'  => ['label'=>'Pending',  'badge'=>'bg-warning text-dark',  'icon'=>'bi-clock-history'],
-    'accepted' => ['label'=>'Accepted', 'badge'=>'bg-success',            'icon'=>'bi-check-circle-fill'],
-    'rejected' => ['label'=>'Rejected', 'badge'=>'bg-danger',             'icon'=>'bi-x-circle-fill'],
+    'pending'      => ['label'=>'Pending',      'badge'=>'bg-warning text-dark', 'icon'=>'bi-clock-history'],
+    'under_review' => ['label'=>'Under Review', 'badge'=>'bg-info text-white',   'icon'=>'bi-search'],
+    'accepted'     => ['label'=>'Accepted',     'badge'=>'bg-success',           'icon'=>'bi-check-circle-fill'],
+    'rejected'     => ['label'=>'Rejected',     'badge'=>'bg-danger',            'icon'=>'bi-x-circle-fill'],
 ];
 ?>
 <!DOCTYPE html>
@@ -79,7 +80,7 @@ $statusConfig = [
 
             <!-- Summary cards -->
             <div class="row g-3 mb-4">
-                <div class="col-sm-3">
+                <div class="col-6 col-md">
                     <a href="applications.php" class="text-decoration-none">
                         <div class="app-summary-card <?= $filterStatus==='all' ? 'active' : '' ?>">
                             <div class="app-summary-count"><?= $counts['all'] ?></div>
@@ -87,9 +88,9 @@ $statusConfig = [
                         </div>
                     </a>
                 </div>
-                <?php foreach (['pending','accepted','rejected'] as $s):
+                <?php foreach (['pending','under_review','accepted','rejected'] as $s):
                     $cfg = $statusConfig[$s]; ?>
-                <div class="col-sm-3">
+                <div class="col-6 col-md">
                     <a href="?status=<?= $s ?>" class="text-decoration-none">
                         <div class="app-summary-card app-summary-<?= $s ?> <?= $filterStatus===$s ? 'active' : '' ?>">
                             <div class="app-summary-count"><?= $counts[$s] ?></div>
@@ -107,7 +108,7 @@ $statusConfig = [
                         All <span class="badge bg-secondary ms-1"><?= $counts['all'] ?></span>
                     </a>
                 </li>
-                <?php foreach (['pending','accepted','rejected'] as $s):
+                <?php foreach (['pending','under_review','accepted','rejected'] as $s):
                     $cfg = $statusConfig[$s]; ?>
                 <li class="nav-item">
                     <a class="nav-link <?= $filterStatus===$s ? 'active' : '' ?>"
@@ -201,6 +202,11 @@ $statusConfig = [
                             <div class="mt-3 alert alert-success py-2 mb-0">
                                 <i class="bi bi-trophy-fill me-2"></i>
                                 <strong>Congratulations!</strong> Your application has been accepted. AUM HR will contact you shortly.
+                            </div>
+                            <?php elseif ($app['status'] === 'under_review'): ?>
+                            <div class="mt-3 alert alert-info py-2 mb-0">
+                                <i class="bi bi-search me-2"></i>
+                                Your application is currently being reviewed by the hiring team.
                             </div>
                             <?php elseif ($app['status'] === 'rejected'): ?>
                             <div class="mt-3 alert alert-secondary py-2 mb-0">

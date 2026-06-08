@@ -580,9 +580,10 @@ a.text-primary:hover       { color: var(--primary-dark) !important; }
 .app-summary-count { font-size: 1.8rem; font-weight: 700; line-height: 1; color: #1a1a2e; }
 .app-summary-label { font-size: .8rem; color: #6c757d; margin-top: 3px; }
 
-.app-summary-pending  .app-summary-count { color: #c27803; }
-.app-summary-accepted .app-summary-count { color: #057a55; }
-.app-summary-rejected .app-summary-count { color: var(--primary); }
+.app-summary-pending       .app-summary-count { color: #c27803; }
+.app-summary-under_review  .app-summary-count { color: #1a56db; }
+.app-summary-accepted      .app-summary-count { color: #057a55; }
+.app-summary-rejected      .app-summary-count { color: var(--primary); }
 
 .app-item-card { transition: var(--transition); }
 .app-item-card:hover { box-shadow: var(--shadow-md); }

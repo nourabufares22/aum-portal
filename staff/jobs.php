@@ -57,13 +57,13 @@ $jobs = $stmt->fetchAll();
 // Departments for filter
 $depts = $pdo->query("SELECT DISTINCT department FROM jobs WHERE status='active' AND department IS NOT NULL ORDER BY department")->fetchAll(PDO::FETCH_COLUMN);
 
-// Detail view
+// Detail view — show any job (active or closed) so applied staff can review their application
 $selectedJob = null;
 if (!empty($_GET['id'])) {
     $jid  = (int)$_GET['id'];
     $stmt = $pdo->prepare("SELECT j.*,
                                    (SELECT id FROM applications WHERE user_id=? AND job_id=j.id) AS applied_id
-                            FROM jobs j WHERE j.id=? AND j.status='active'");
+                            FROM jobs j WHERE j.id=?");
     $stmt->execute([$userId, $jid]);
     $selectedJob = $stmt->fetch();
 }
@@ -231,7 +231,7 @@ if (!empty($_GET['id'])) {
             <div class="row g-4">
                 <?php foreach ($jobs as $job):
                     $dl   = $job['deadline'] ? strtotime($job['deadline']) : null;
-                    $soon = $dl && ($dl - time()) < 7 * 86400 && $dl > time();
+                    $soon = $dl && $dl - time() < 7 * 86400 && $dl > time();
                     $past = $dl && $dl < time();
                 ?>
                 <div class="col-lg-6">
