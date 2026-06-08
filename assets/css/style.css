@@ -792,3 +792,133 @@ a.text-primary:hover       { color: var(--primary-dark) !important; }
 @media (max-width: 991px) {
   .sticky-top { position: static !important; }
 }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes ripple-effect {
+  to { transform: scale(4); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-18px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-22px) rotate(8deg); }
+}
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(350%)  rotate(30deg); }
+}
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .55; }
+}
+
+/* ── Scroll-triggered reveal ─────────────────────────────── */
+.scroll-hidden {
+  opacity:    0;
+  transform:  translateY(28px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.scroll-visible {
+  opacity:   1;
+  transform: translateY(0);
+}
+
+/* ── Stagger delays ──────────────────────────────────────── */
+.delay-1 { animation-delay: .08s; }
+.delay-2 { animation-delay: .16s; }
+.delay-3 { animation-delay: .24s; }
+.delay-4 { animation-delay: .32s; }
+.delay-5 { animation-delay: .40s; }
+.delay-6 { animation-delay: .48s; }
+
+/* ── Auth entrance ───────────────────────────────────────── */
+.auth-form-container { animation: fadeInUp .6s cubic-bezier(.34,1.2,.64,1) both; }
+.auth-panel-content  { animation: fadeInLeft .6s ease both; }
+
+/* ── Floating orbs (auth left panel) ────────────────────── */
+.auth-orb {
+  position:      absolute;
+  border-radius: 50%;
+  background:    rgba(255,255,255,.07);
+  pointer-events: none;
+}
+.auth-orb-1 { width: 220px; height: 220px; top:  8%; left:  2%; animation: float  6s ease-in-out infinite; }
+.auth-orb-2 { width: 130px; height: 130px; bottom: 12%; right:  8%; animation: float2 5s ease-in-out infinite; }
+.auth-orb-3 { width:  70px; height:  70px; top: 55%; left: 35%; animation: float  7s ease-in-out infinite; }
+
+/* ── Welcome banner shimmer ──────────────────────────────── */
+.welcome-banner { position: relative; overflow: hidden; }
+.welcome-banner::before {
+  content:    '';
+  position:   absolute;
+  top:        -50%;
+  left:       0;
+  width:      35%;
+  height:     200%;
+  background: rgba(255,255,255,.07);
+  animation:  shimmer-sweep 4s ease-in-out infinite;
+}
+
+/* ── Stat card spring hover ──────────────────────────────── */
+.stat-card {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease !important;
+}
+.stat-card:hover {
+  transform:  translateY(-7px) scale(1.02) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,.18) !important;
+}
+
+/* ── Quick-link spring ───────────────────────────────────── */
+.quick-link-card {
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s, color .2s !important;
+}
+.quick-link-card:hover { transform: translateY(-5px) scale(1.05) !important; }
+
+/* ── Skill tag spring ────────────────────────────────────── */
+.skill-tag {
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .2s, color .2s, border-color .2s !important;
+}
+.skill-tag:hover { transform: scale(1.07) !important; }
+
+/* ── Sidebar link indent on hover ────────────────────────── */
+.sidebar-link { transition: background .2s ease, border-left-color .2s ease, color .2s ease, padding-left .2s ease !important; }
+.sidebar-link:hover { padding-left: 26px !important; }
+
+/* ── Card universal hover lift ───────────────────────────── */
+.card { transition: box-shadow .25s ease; }
+.card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.11); }
+
+/* ── Ripple ──────────────────────────────────────────────── */
+.btn-portal, .btn-primary { position: relative; overflow: hidden; }
+.ripple {
+  position:      absolute;
+  border-radius: 50%;
+  background:    rgba(255,255,255,.35);
+  transform:     scale(0);
+  animation:     ripple-effect .55s linear;
+  pointer-events: none;
+}
+
+/* ── Pending badge pulse ─────────────────────────────────── */
+.badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }

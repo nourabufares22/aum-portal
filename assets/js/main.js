@@ -123,9 +123,94 @@ function confirmDelete(id, typeName, itemName) {
     });
 })();
 
-/* ── Smooth card hover enhancement ──────────────────────────── */
+/* ── Scroll-reveal via IntersectionObserver ─────────────────── */
 (function () {
-    document.querySelectorAll('.stat-card, .job-card, .exp-card').forEach(function (card) {
-        card.style.transition = 'transform .2s ease, box-shadow .2s ease';
+    if (!window.IntersectionObserver) return;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('scroll-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(
+        '.card, .stat-card, .job-card, .exp-card, .doc-card, .skill-tag, .app-summary-card, .quick-link-card'
+    ).forEach(function (el, i) {
+        el.classList.add('scroll-hidden');
+        el.style.transitionDelay = (i % 6) * 0.07 + 's';
+        observer.observe(el);
+    });
+})();
+
+/* ── Counter animation for stat numbers ─────────────────────── */
+(function () {
+    if (!window.IntersectionObserver) return;
+    function animateCount(el) {
+        var target = parseInt(el.textContent, 10);
+        if (isNaN(target) || target < 2) return;
+        var start    = 0;
+        var duration = 900;
+        var startTime = null;
+        function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var ease     = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            el.textContent = Math.floor(ease * target);
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+    }
+    var counter = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                counter.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-value, .app-count, .app-summary-count, .arb-value').forEach(function (el) {
+        counter.observe(el);
+    });
+})();
+
+/* ── Ripple effect on buttons ───────────────────────────────── */
+(function () {
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.btn-portal, .btn-primary');
+        if (!btn) return;
+        var rect   = btn.getBoundingClientRect();
+        var size   = Math.max(rect.width, rect.height);
+        var ripple = document.createElement('span');
+        ripple.className  = 'ripple';
+        ripple.style.cssText = 'width:' + size + 'px;height:' + size + 'px;'
+            + 'left:' + (e.clientX - rect.left - size / 2) + 'px;'
+            + 'top:'  + (e.clientY - rect.top  - size / 2) + 'px;';
+        btn.appendChild(ripple);
+        setTimeout(function () { ripple.remove(); }, 600);
+    });
+})();
+
+/* ── Floating orbs on auth panel ────────────────────────────── */
+(function () {
+    var panel = document.querySelector('.auth-panel-left');
+    if (!panel) return;
+    panel.style.position = 'relative';
+    panel.style.overflow = 'hidden';
+    [1, 2, 3].forEach(function (n) {
+        var orb = document.createElement('div');
+        orb.className = 'auth-orb auth-orb-' + n;
+        panel.appendChild(orb);
+    });
+})();
+
+/* ── Stagger-animate top-level grid columns on load ─────────── */
+(function () {
+    document.querySelectorAll('.content-area > .row > [class*="col-"]').forEach(function (col, i) {
+        col.style.animation      = 'fadeInUp .45s ease both';
+        col.style.animationDelay = (i * 0.09) + 's';
     });
 })();
