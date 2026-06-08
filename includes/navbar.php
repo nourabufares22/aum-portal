@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Fetch display name for navbar
 $_navUserId = getCurrentUserId();
 $_navProfile = null;

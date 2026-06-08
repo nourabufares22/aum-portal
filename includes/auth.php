@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,7 +18,7 @@ function getCurrentUserId(): int {
     return (int)($_SESSION['user_id'] ?? 0);
 }
 
-// ── Flash messages ────────────────────────────────────────────
+// -- Flash messages --------------------------------------------
 function setFlash(string $type, string $message): void {
     $_SESSION['flash'] = ['type' => $type, 'message' => $message];
 }
@@ -43,14 +43,14 @@ function displayFlash(): void {
        . '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
 }
 
-// ── Profile completion (7 optional fields) ────────────────────
+// -- Profile completion (7 optional fields) --------------------
 function profileCompletion(array $p): int {
     $fields = ['first_name','last_name','phone','department','nationality','linkedin'];
     $filled = array_reduce($fields, fn($c, $f) => $c + (!empty($p[$f]) ? 1 : 0), 0);
     return (int)(($filled / count($fields)) * 100);
 }
 
-// ── Sanitise output ───────────────────────────────────────────
+// -- Sanitise output -------------------------------------------
 function e(string $s): string {
     return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }

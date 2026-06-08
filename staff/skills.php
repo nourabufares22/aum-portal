@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'Skills';
 $userId    = getCurrentUserId();
 
-// ── CRUD ──────────────────────────────────────────────────────
+// -- CRUD ------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Fetch ─────────────────────────────────────────────────────
+// -- Fetch -----------------------------------------------------
 $stmt = $pdo->prepare('SELECT * FROM skills WHERE user_id=? ORDER BY skill_name ASC');
 $stmt->execute([$userId]);
 $skills = $stmt->fetchAll();

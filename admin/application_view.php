@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 require_once '../includes/admin_auth.php';
@@ -7,7 +7,7 @@ requireAdmin();
 $appId = (int)($_GET['id'] ?? 0);
 if (!$appId) { header('Location: applications.php'); exit; }
 
-// ── Load application ──────────────────────────────────────────
+// -- Load application ------------------------------------------
 $stmt = $pdo->prepare(
     "SELECT a.*, j.title AS job_title, j.department AS job_dept,
              j.description AS job_desc, j.requirements AS job_req,
@@ -26,7 +26,7 @@ if (!$app) { setFlash('error', 'Application not found.'); header('Location: appl
 $applicantId = $app['user_id'];
 $pageTitle   = 'Application #' . $appId;
 
-// ── Handle POST actions ───────────────────────────────────────
+// -- Handle POST actions ---------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verifyCsrf();
     $action = $_POST['action'] ?? '';
@@ -73,16 +73,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Reload after any redirected action ───────────────────────
+// -- Reload after any redirected action -----------------------
 $stmt->execute([$appId]);
 $app = $stmt->fetch();
 
-// ── Applicant profile ─────────────────────────────────────────
+// -- Applicant profile -----------------------------------------
 $stmt = $pdo->prepare('SELECT * FROM staff_profiles WHERE user_id = ?');
 $stmt->execute([$applicantId]);
 $profile = $stmt->fetch() ?: [];
 
-// ── Qualifications, Publications, Experience, Skills ──────────
+// -- Qualifications, Publications, Experience, Skills ----------
 $qual = $pdo->prepare('SELECT * FROM qualifications WHERE user_id=? ORDER BY graduation_year DESC');
 $qual->execute([$applicantId]); $qualifications = $qual->fetchAll();
 
@@ -95,12 +95,12 @@ $exp->execute([$applicantId]); $experiences = $exp->fetchAll();
 $sk = $pdo->prepare('SELECT * FROM skills WHERE user_id=? ORDER BY skill_name');
 $sk->execute([$applicantId]); $skills = $sk->fetchAll();
 
-// ── Documents ─────────────────────────────────────────────────
+// -- Documents -------------------------------------------------
 $docs = $pdo->prepare('SELECT * FROM documents WHERE user_id=? ORDER BY document_type, uploaded_at DESC');
 $docs->execute([$applicantId]); $documents = $docs->fetchAll();
 $cvDocs = array_filter($documents, fn($d) => $d['document_type'] === 'cv');
 
-// ── Admin notes ───────────────────────────────────────────────
+// -- Admin notes -----------------------------------------------
 $notes = $pdo->prepare(
     "SELECT an.*, u.email AS admin_email
      FROM admin_notes an JOIN users u ON u.id = an.admin_id
@@ -132,7 +132,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
 
             <div class="row g-4">
 
-                <!-- ── Left: Applicant profile ── -->
+                <!-- -- Left: Applicant profile -- -->
                 <div class="col-lg-8">
 
                     <!-- Applicant header -->
@@ -231,7 +231,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                                                 <td class="fw-medium"><?= e($q['degree']) ?></td>
                                                 <td><?= e($q['university']) ?></td>
                                                 <td><span class="badge bg-primary-subtle text-primary"><?= e($q['graduation_year']) ?></span></td>
-                                                <td><?= $q['certification'] ? e($q['certification']) : '—' ?></td>
+                                                <td><?= $q['certification'] ? e($q['certification']) : '-' ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
@@ -256,7 +256,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                                                 <td class="fw-medium"><?= e($p['title']) ?></td>
                                                 <td><?= e($p['journal']) ?></td>
                                                 <td><span class="badge bg-success-subtle text-success"><?= e($p['publication_year']) ?></span></td>
-                                                <td><?= $p['research_interest'] ? e($p['research_interest']) : '—' ?></td>
+                                                <td><?= $p['research_interest'] ? e($p['research_interest']) : '-' ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
@@ -352,7 +352,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                     </div>
                 </div><!-- /.col-lg-8 -->
 
-                <!-- ── Right: Actions ── -->
+                <!-- -- Right: Actions -- -->
                 <div class="col-lg-4">
 
                     <!-- Job info -->
@@ -375,7 +375,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                             <div class="mt-3 pt-3 border-top">
                                 <p class="text-muted small fw-medium mb-1">Cover Letter:</p>
                                 <p class="text-muted small mb-0 fst-italic">
-                                    <?= e(mb_strimwidth($app['cover_letter'], 0, 300, '…')) ?>
+                                    <?= e(mb_strimwidth($app['cover_letter'], 0, 300, '...')) ?>
                                 </p>
                             </div>
                             <?php endif; ?>
@@ -443,7 +443,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                                         Admin Note <span class="text-muted">(optional)</span>
                                     </label>
                                     <textarea name="note" class="form-control form-control-sm" rows="3"
-                                              placeholder="Add an internal note about this decision…"></textarea>
+                                              placeholder="Add an internal note about this decision..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-portal btn-sm w-100">
                                     <i class="bi bi-check-lg me-1"></i>Save Changes
@@ -480,7 +480,7 @@ $notes->execute([$appId]); $adminNotes = $notes->fetchAll();
                                 <input type="hidden" name="action" value="add_note">
                                 <div class="input-group input-group-sm">
                                     <input type="text" class="form-control" name="note"
-                                           placeholder="Add a quick note…" required>
+                                           placeholder="Add a quick note..." required>
                                     <button type="submit" class="btn btn-primary btn-portal">
                                         <i class="bi bi-plus-lg"></i>
                                     </button>

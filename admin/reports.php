@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 require_once '../includes/admin_auth.php';
@@ -6,7 +6,7 @@ requireAdmin();
 
 $pageTitle = 'Reports & Analytics';
 
-// ── CSV export handler (runs before any HTML) ─────────────────
+// -- CSV export handler (runs before any HTML) -----------------
 $exportType = trim($_GET['export'] ?? '');
 
 if ($exportType) {
@@ -120,7 +120,7 @@ if ($exportType) {
     exit;
 }
 
-// ── Load all report data (HTML mode) ──────────────────────────
+// -- Load all report data (HTML mode) --------------------------
 
 // 1. Summary
 $totalStaff   = (int)$pdo->query("SELECT COUNT(*) FROM users WHERE role='staff'")->fetchColumn();
@@ -189,7 +189,7 @@ $recentActivity = $pdo->query(
             <div class="page-header mb-4">
                 <div>
                     <h5 class="mb-1">Reports & Analytics</h5>
-                    <p class="text-muted mb-0">American University of Madaba — Employment Portal Statistics</p>
+                    <p class="text-muted mb-0">American University of Madaba - Employment Portal Statistics</p>
                 </div>
                 <div class="d-flex gap-2">
                     <button onclick="window.print()" class="btn btn-outline-secondary btn-sm">
@@ -198,7 +198,7 @@ $recentActivity = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Summary stat cards ── -->
+            <!-- -- Summary stat cards -- -->
             <div class="row g-4 mb-4">
                 <div class="col-xl-3 col-md-6">
                     <div class="stat-card stat-primary">
@@ -235,7 +235,7 @@ $recentActivity = $pdo->query(
             }
             ?>
 
-            <!-- ── Report 1: Staff by Department ── -->
+            <!-- -- Report 1: Staff by Department -- -->
             <div class="card border-0 shadow-sm mb-4 report-card" id="report-staff-dept">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-building me-2"></i>Staff by Department</span>
@@ -273,7 +273,7 @@ $recentActivity = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Report 2: Applications per Job ── -->
+            <!-- -- Report 2: Applications per Job -- -->
             <div class="card border-0 shadow-sm mb-4 report-card" id="report-apps-job">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-briefcase me-2"></i>Applications per Job</span>
@@ -298,7 +298,7 @@ $recentActivity = $pdo->query(
                                     <span class="badge bg-secondary ms-1">Closed</span>
                                     <?php endif; ?>
                                 </td>
-                                <td><span class="badge bg-light text-dark border"><?= e($r['department'] ?? '—') ?></span></td>
+                                <td><span class="badge bg-light text-dark border"><?= e($r['department'] ?? '-') ?></span></td>
                                 <td class="text-center"><strong><?= $r['total'] ?></strong></td>
                                 <td class="text-center"><span class="badge bg-warning text-dark"><?= $r['pending'] ?></span></td>
                                 <td class="text-center"><span class="badge bg-info"><?= $r['under_review'] ?></span></td>
@@ -312,7 +312,7 @@ $recentActivity = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Row: Apps by Status + Accepted vs Rejected ── -->
+            <!-- -- Row: Apps by Status + Accepted vs Rejected -- -->
             <div class="row g-4 mb-4">
                 <div class="col-lg-6">
                     <div class="card border-0 shadow-sm h-100 report-card">
@@ -384,7 +384,7 @@ $recentActivity = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Report: Most Active Departments ── -->
+            <!-- -- Report: Most Active Departments -- -->
             <div class="card border-0 shadow-sm mb-4 report-card">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-graph-up me-2"></i>Most Active Departments</span>
@@ -423,7 +423,7 @@ $recentActivity = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Report: Recent Recruitment Activity ── -->
+            <!-- -- Report: Recent Recruitment Activity -- -->
             <div class="card border-0 shadow-sm report-card">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-activity me-2"></i>Recent Recruitment Activity</span>
@@ -451,7 +451,7 @@ $recentActivity = $pdo->query(
                                     <small class="text-muted"><?= e($r['email']) ?></small>
                                 </td>
                                 <td><?= e($r['job_title']) ?></td>
-                                <td><span class="badge bg-light text-dark border"><?= e($r['department'] ?? '—') ?></span></td>
+                                <td><span class="badge bg-light text-dark border"><?= e($r['department'] ?? '-') ?></span></td>
                                 <td><small class="text-muted"><?= date('M j, Y', strtotime($r['applied_at'])) ?></small></td>
                                 <td><?= statusBadge($r['status']) ?></td>
                                 <td class="text-end">

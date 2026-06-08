@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 /**
- * AUM E-Portal — Entry point
+ * AUM E-Portal - Entry point
  * Redirects to dashboard if logged in, otherwise to login.
  */
 require_once 'config/db.php';

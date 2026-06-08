@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -55,7 +55,7 @@ $recentJobs = $pdo->query("SELECT * FROM jobs WHERE status='active' ORDER BY cre
                 </a>
             </div>
 
-            <!-- ── Stat Cards ─────────────────────────────── -->
+            <!-- -- Stat Cards ------------------------------- -->
             <div class="row g-4 mb-4">
 
                 <!-- Profile completion -->
@@ -71,7 +71,7 @@ $recentJobs = $pdo->query("SELECT * FROM jobs WHERE status='active' ORDER BY cre
                                 <div class="progress-bar bg-white" style="width:<?= $completion ?>%"></div>
                             </div>
                             <?php if ($completion < 100): ?>
-                            <small><a href="profile.php" class="text-white-50">Complete your profile →</a></small>
+                            <small><a href="profile.php" class="text-white-50">Complete your profile -></a></small>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ $recentJobs = $pdo->query("SELECT * FROM jobs WHERE status='active' ORDER BY cre
                 </div>
             </div>
 
-            <!-- ── Second row ─────────────────────────────── -->
+            <!-- -- Second row ------------------------------- -->
             <div class="row g-4">
 
                 <!-- Application summary -->
@@ -219,7 +219,7 @@ $recentJobs = $pdo->query("SELECT * FROM jobs WHERE status='active' ORDER BY cre
                 </div>
             </div>
 
-            <!-- ── Recent Jobs ────────────────────────────── -->
+            <!-- -- Recent Jobs ------------------------------ -->
             <div class="card border-0 shadow-sm mt-4">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-briefcase me-2"></i>Recent Job Opportunities</span>
@@ -252,7 +252,7 @@ $recentJobs = $pdo->query("SELECT * FROM jobs WHERE status='active' ORDER BY cre
                                         <strong><?= e($job['title']) ?></strong>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark border"><?= e($job['department'] ?? '—') ?></span>
+                                        <span class="badge bg-light text-dark border"><?= e($job['department'] ?? '-') ?></span>
                                     </td>
                                     <td>
                                         <?php if ($dl): ?>

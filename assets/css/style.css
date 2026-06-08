@@ -793,3 +793,252 @@ a.text-primary:hover       { color: var(--primary-dark) !important; }
 @media (max-width: 991px) {
   .sticky-top { position: static !important; }
 }
+
+/* ============================================================
+   EXTREME ANIMATIONS
+   ============================================================ */
+
+/* ── Keyframes ───────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ripple-effect {
+  to { transform: scale(5); opacity: 0; }
+}
+@keyframes gradient-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes neon-glow {
+  0%,100% { box-shadow: 0 0 6px var(--primary), 0 0 22px rgba(151,0,0,.45), 0 0 55px rgba(151,0,0,.15); }
+  50%      { box-shadow: 0 0 14px var(--primary), 0 0 45px rgba(151,0,0,.7),  0 0 90px rgba(151,0,0,.3); }
+}
+@keyframes glitch-1 {
+  0%,100% { clip-path: inset(0 0 98% 0); transform: translateX(0); }
+  10%     { clip-path: inset(12% 0 58% 0); transform: translateX(-3px); }
+  25%     { clip-path: inset(42% 0 28% 0); transform: translateX(3px); }
+  40%     { clip-path: inset(68% 0 8% 0);  transform: translateX(-3px); }
+  55%     { clip-path: inset(0 0 98% 0); transform: translateX(0); }
+}
+@keyframes glitch-2 {
+  0%,100% { clip-path: inset(0 0 98% 0); transform: translateX(0); }
+  15%     { clip-path: inset(22% 0 48% 0); transform: translateX(4px); color: #0ff; }
+  30%     { clip-path: inset(52% 0 18% 0); transform: translateX(-4px); }
+  48%     { clip-path: inset(78% 0 4% 0);  transform: translateX(4px); }
+  58%     { clip-path: inset(0 0 98% 0); transform: translateX(0); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+@keyframes float2 {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-26px) rotate(10deg); }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-5px) rotate(-2deg); }
+  40%     { transform: translateX(5px) rotate(2deg); }
+  60%     { transform: translateX(-3px); }
+  80%     { transform: translateX(3px); }
+}
+@keyframes blink-cursor {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+@keyframes badge-pulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: .5; }
+}
+@keyframes border-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(.7) translateY(20px); }
+  70%  { transform: scale(1.06) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Scroll reveal ───────────────────────────────────────── */
+.scroll-hidden {
+  opacity:   0;
+  transform: translateY(32px);
+  transition: opacity .55s cubic-bezier(.34,1.2,.64,1), transform .55s cubic-bezier(.34,1.2,.64,1);
+}
+.scroll-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Stagger delays ──────────────────────────────────────── */
+.delay-1 { animation-delay: .07s; }
+.delay-2 { animation-delay: .14s; }
+.delay-3 { animation-delay: .21s; }
+.delay-4 { animation-delay: .28s; }
+.delay-5 { animation-delay: .35s; }
+.delay-6 { animation-delay: .42s; }
+
+/* ── Particle canvas ─────────────────────────────────────── */
+#aum-particles {
+  position: fixed;
+  inset:    0;
+  width:    100%; height: 100%;
+  pointer-events: none;
+  z-index:  0;
+}
+.wrapper, .auth-wrapper { position: relative; z-index: 1; }
+
+/* ── Animated gradient backgrounds ──────────────────────── */
+.auth-body {
+  background-size:  400% 400% !important;
+  background-image: linear-gradient(135deg,#3a0000 0%,#6b0000 25%,#970000 50%,#c20000 75%,#6b0000 100%) !important;
+  animation: gradient-flow 9s ease infinite;
+}
+.welcome-banner {
+  background-size:  300% 300% !important;
+  background-image: linear-gradient(135deg,#6b0000 0%,#970000 35%,#c20000 55%,#970000 75%,#6b0000 100%) !important;
+  animation: gradient-flow 6s ease infinite;
+  position: relative; overflow: hidden;
+}
+.stat-primary {
+  background-size: 200% 200% !important;
+  background-image: linear-gradient(135deg,#6b0000,#970000,#c20000,#970000) !important;
+  animation: gradient-flow 4s ease infinite;
+}
+.stat-blue {
+  background-size: 200% 200% !important;
+  background-image: linear-gradient(135deg,#0d3b91,#1a56db,#4f7fe5,#1a56db) !important;
+  animation: gradient-flow 4s ease infinite .5s;
+}
+.stat-green {
+  background-size: 200% 200% !important;
+  background-image: linear-gradient(135deg,#03471f,#057a55,#0e9f6e,#057a55) !important;
+  animation: gradient-flow 4s ease infinite 1s;
+}
+.stat-orange {
+  background-size: 200% 200% !important;
+  background-image: linear-gradient(135deg,#7a4600,#c27803,#e3a008,#c27803) !important;
+  animation: gradient-flow 4s ease infinite 1.5s;
+}
+
+/* ── Neon button glow on hover ───────────────────────────── */
+.btn-portal:hover, .btn-primary:hover {
+  animation: neon-glow .9s ease-in-out infinite;
+}
+
+/* ── Ripple ──────────────────────────────────────────────── */
+.btn-portal, .btn-primary { position: relative; overflow: hidden; }
+.ripple {
+  position:      absolute;
+  border-radius: 50%;
+  background:    rgba(255,255,255,.4);
+  transform:     scale(0);
+  animation:     ripple-effect .6s linear;
+  pointer-events: none;
+}
+
+/* ── 3D tilt cards ───────────────────────────────────────── */
+.stat-card { transform-style: preserve-3d; }
+.tilt-glare {
+  position:      absolute;
+  inset:         0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity:       0;
+  transition:    opacity .3s;
+  border-radius: var(--radius);
+}
+
+/* ── Spring hover: stat cards ────────────────────────────── */
+.stat-card {
+  transition: box-shadow .3s ease !important;
+}
+
+/* ── Quick link spring ───────────────────────────────────── */
+.quick-link-card {
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s, color .2s !important;
+}
+.quick-link-card:hover { transform: translateY(-6px) scale(1.07) !important; }
+
+/* ── Skill tag spring ────────────────────────────────────── */
+.skill-tag {
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .2s, color .2s, border-color .2s !important;
+}
+.skill-tag:hover { transform: scale(1.1) !important; }
+
+/* ── Card hover lift ─────────────────────────────────────── */
+.card { transition: box-shadow .28s ease, transform .28s cubic-bezier(.34,1.4,.64,1); }
+.card:hover { box-shadow: 0 10px 35px rgba(0,0,0,.13); transform: translateY(-3px); }
+
+/* ── Sidebar link indent ─────────────────────────────────── */
+.sidebar-link {
+  transition: background .2s, border-left-color .2s, color .2s, padding-left .2s !important;
+}
+.sidebar-link:hover { padding-left: 28px !important; }
+.sidebar-link.active {
+  box-shadow: inset 3px 0 10px rgba(255,255,255,.25), inset 0 0 20px rgba(255,255,255,.06);
+}
+
+/* ── Glitch on sidebar brand ─────────────────────────────── */
+.sidebar-brand-logo { position: relative; cursor: pointer; }
+.sidebar-brand-logo:hover { animation: shake .4s ease; }
+.sidebar-brand-logo::before,
+.sidebar-brand-logo::after {
+  content:  attr(data-text);
+  position: absolute;
+  inset:    0;
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size:   1.1rem;
+  opacity:  0;
+  background: inherit;
+  border-radius: inherit;
+}
+.sidebar-brand-logo:hover::before {
+  color: #0ff; opacity: .8;
+  animation: glitch-1 .55s steps(1) infinite;
+}
+.sidebar-brand-logo:hover::after {
+  color: #f0f; opacity: .8;
+  animation: glitch-2 .55s steps(1) infinite .08s;
+}
+
+/* ── Typewriter cursor ───────────────────────────────────── */
+.typewriter-cursor {
+  display:    inline-block;
+  width:      2px; height: 1em;
+  background: #fff;
+  margin-left: 3px;
+  vertical-align: middle;
+  animation:  blink-cursor .65s step-end infinite;
+}
+
+/* ── Floating auth orbs ──────────────────────────────────── */
+.auth-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  pointer-events: none;
+}
+.auth-orb-1 { width:240px; height:240px; top:6%;    left:0%;   animation: float  7s ease-in-out infinite; }
+.auth-orb-2 { width:140px; height:140px; bottom:10%;right:5%;  animation: float2 5s ease-in-out infinite; }
+.auth-orb-3 { width: 80px; height: 80px; top:52%;   left:32%;  animation: float  8s ease-in-out infinite; }
+
+/* ── Auth entrance ───────────────────────────────────────── */
+.auth-form-container { animation: pop-in .65s cubic-bezier(.34,1.2,.64,1) both; }
+.auth-panel-content  { animation: fadeInLeft .6s ease both; }
+
+/* ── Content area entrance ───────────────────────────────── */
+.content-area { animation: slideUp .5s cubic-bezier(.34,1.2,.64,1) both; }
+
+/* ── Badge pulse ─────────────────────────────────────────── */
+.badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }

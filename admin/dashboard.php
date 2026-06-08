@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 require_once '../includes/admin_auth.php';
@@ -6,7 +6,7 @@ requireAdmin();
 
 $pageTitle = 'Dashboard';
 
-// ── Key metrics ───────────────────────────────────────────────
+// -- Key metrics -----------------------------------------------
 $totalStaff   = (int)$pdo->query("SELECT COUNT(*) FROM users WHERE role='staff'")->fetchColumn();
 $activeJobs   = (int)$pdo->query("SELECT COUNT(*) FROM jobs WHERE status='active'")->fetchColumn();
 $totalApps    = (int)$pdo->query("SELECT COUNT(*) FROM applications")->fetchColumn();
@@ -70,7 +70,7 @@ $topJobs = $pdo->query(
             <div class="welcome-banner mb-4">
                 <div>
                     <h4 class="mb-1">Admin Dashboard</h4>
-                    <p class="mb-0 opacity-75">American University of Madaba — Employment Portal Overview</p>
+                    <p class="mb-0 opacity-75">American University of Madaba - Employment Portal Overview</p>
                 </div>
                 <div class="d-flex gap-2">
                     <a href="applications.php" class="btn btn-outline-light btn-sm">
@@ -82,7 +82,7 @@ $topJobs = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Stat cards ── -->
+            <!-- -- Stat cards -- -->
             <div class="row g-4 mb-4">
                 <div class="col-xl-3 col-md-6">
                     <div class="stat-card stat-primary">
@@ -136,7 +136,7 @@ $topJobs = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Row 2 ── -->
+            <!-- -- Row 2 -- -->
             <div class="row g-4 mb-4">
 
                 <!-- Application status breakdown -->
@@ -210,7 +210,7 @@ $topJobs = $pdo->query(
                                     <?php foreach ($topJobs as $j): ?>
                                         <tr>
                                             <td class="fw-medium"><?= e($j['title']) ?></td>
-                                            <td><span class="badge bg-light text-dark border"><?= e($j['department'] ?? '—') ?></span></td>
+                                            <td><span class="badge bg-light text-dark border"><?= e($j['department'] ?? '-') ?></span></td>
                                             <td class="text-center">
                                                 <span class="badge bg-primary"><?= $j['cnt'] ?></span>
                                             </td>
@@ -225,7 +225,7 @@ $topJobs = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── Recent applications ── -->
+            <!-- -- Recent applications -- -->
             <div class="card border-0 shadow-sm">
                 <div class="card-header-custom d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-clock-history me-2"></i>Recent Applications</span>
@@ -257,7 +257,7 @@ $topJobs = $pdo->query(
                                         <small class="text-muted"><?= e($app['email']) ?></small>
                                     </td>
                                     <td><?= e($app['job_title']) ?></td>
-                                    <td><span class="badge bg-light text-dark border"><?= e($app['department'] ?? '—') ?></span></td>
+                                    <td><span class="badge bg-light text-dark border"><?= e($app['department'] ?? '-') ?></span></td>
                                     <td><small><?= date('M j, Y', strtotime($app['applied_at'])) ?></small></td>
                                     <td><?= statusBadge($app['status']) ?></td>
                                     <td class="text-end">

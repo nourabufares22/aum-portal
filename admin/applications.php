@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 require_once '../includes/admin_auth.php';
@@ -6,18 +6,18 @@ requireAdmin();
 
 $pageTitle = 'Application Management';
 
-// ── Filters ───────────────────────────────────────────────────
+// -- Filters ---------------------------------------------------
 $filterJob    = (int)(  $_GET['job']    ?? 0);
 $filterDept   = trim(   $_GET['dept']   ?? '');
 $filterStatus = trim(   $_GET['status'] ?? '');
 $search       = trim(   $_GET['search'] ?? '');
 
-// ── Pagination ────────────────────────────────────────────────
+// -- Pagination ------------------------------------------------
 $perPage   = 20;
 $page      = max(1, (int)($_GET['page'] ?? 1));
 $offset    = ($page - 1) * $perPage;
 
-// ── Build WHERE clause ────────────────────────────────────────
+// -- Build WHERE clause ----------------------------------------
 $where  = ['1=1'];
 $params = [];
 
@@ -78,7 +78,7 @@ $jobs = $pdo->query("SELECT id, title FROM jobs ORDER BY title")->fetchAll();
 $depts = $pdo->query("SELECT DISTINCT department FROM jobs WHERE department IS NOT NULL ORDER BY department")
              ->fetchAll(PDO::FETCH_COLUMN);
 
-// ── Current filter params string (for pagination links) ───────
+// -- Current filter params string (for pagination links) -------
 $filterQS = http_build_query(array_filter([
     'job'    => $filterJob    ?: null,
     'dept'   => $filterDept   ?: null,
@@ -107,7 +107,7 @@ $filterQS = http_build_query(array_filter([
                 </a>
             </div>
 
-            <!-- ── Status filter tabs ── -->
+            <!-- -- Status filter tabs -- -->
             <ul class="nav nav-tabs mb-0">
                 <?php
                 $tabDefs = [
@@ -130,7 +130,7 @@ $filterQS = http_build_query(array_filter([
                 <?php endforeach; ?>
             </ul>
 
-            <!-- ── Filter bar ── -->
+            <!-- -- Filter bar -- -->
             <div class="card border-0 shadow-sm border-top-0" style="border-radius:0 0 12px 12px">
                 <div class="card-body py-3">
                     <form method="GET" class="row g-2 align-items-end">
@@ -143,7 +143,7 @@ $filterQS = http_build_query(array_filter([
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text"><i class="bi bi-search"></i></span>
                                 <input type="text" class="form-control" name="search"
-                                       placeholder="Name or email…" value="<?= e($search) ?>">
+                                       placeholder="Name or email..." value="<?= e($search) ?>">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -180,7 +180,7 @@ $filterQS = http_build_query(array_filter([
                 </div>
             </div>
 
-            <!-- ── Applications table ── -->
+            <!-- -- Applications table -- -->
             <div class="card border-0 shadow-sm mt-3">
                 <div class="card-body p-0">
                     <?php if (empty($applications)): ?>
@@ -222,7 +222,7 @@ $filterQS = http_build_query(array_filter([
                                         </div>
                                     </td>
                                     <td><?= e($app['job_title']) ?></td>
-                                    <td><span class="badge bg-light text-dark border"><?= e($app['department'] ?? '—') ?></span></td>
+                                    <td><span class="badge bg-light text-dark border"><?= e($app['department'] ?? '-') ?></span></td>
                                     <td><small class="text-muted"><?= date('M j, Y', strtotime($app['applied_at'])) ?></small></td>
                                     <td><?= statusBadge($app['status']) ?></td>
                                     <td class="text-end">
@@ -237,17 +237,17 @@ $filterQS = http_build_query(array_filter([
                         </table>
                     </div>
 
-                    <!-- ── Pagination ── -->
+                    <!-- -- Pagination -- -->
                     <?php if ($totalPages > 1): ?>
                     <div class="d-flex justify-content-between align-items-center px-4 py-3 border-top">
                         <small class="text-muted">
-                            Showing <?= $offset + 1 ?>–<?= min($offset + $perPage, $totalCount) ?>
+                            Showing <?= $offset + 1 ?>-<?= min($offset + $perPage, $totalCount) ?>
                             of <?= $totalCount ?> applications
                         </small>
                         <nav>
                             <ul class="pagination pagination-sm mb-0">
                                 <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?<?= $filterQS ?>&page=<?= $page - 1 ?>">‹</a>
+                                    <a class="page-link" href="?<?= $filterQS ?>&page=<?= $page - 1 ?>">&lsaquo;</a>
                                 </li>
                                 <?php
                                 $start = max(1, $page - 2);
@@ -258,7 +258,7 @@ $filterQS = http_build_query(array_filter([
                                 </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?<?= $filterQS ?>&page=<?= $page + 1 ?>">›</a>
+                                    <a class="page-link" href="?<?= $filterQS ?>&page=<?= $page + 1 ?>">&rsaquo;</a>
                                 </li>
                             </ul>
                         </nav>

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 /**
- * Secure file download — admin only.
+ * Secure file download - admin only.
  * Never exposes real file paths; validates ownership via DB only.
  */
 require_once '../config/db.php';
@@ -19,7 +19,7 @@ $doc = $stmt->fetch();
 if (!$doc) { http_response_code(404); exit('File not found.'); }
 
 // Resolve absolute path
-$projectRoot = dirname(__DIR__); // admin/ → project root
+$projectRoot = dirname(__DIR__); // admin/ -> project root
 $fullPath    = realpath($projectRoot . DIRECTORY_SEPARATOR . $doc['file_path']);
 
 // Security: ensure resolved path is inside the uploads directory (prevent traversal)

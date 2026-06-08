@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
 requireLogin();
@@ -6,7 +6,7 @@ requireLogin();
 $pageTitle = 'Qualifications';
 $userId    = getCurrentUserId();
 
-// ── CRUD ──────────────────────────────────────────────────────
+// -- CRUD ------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Fetch ─────────────────────────────────────────────────────
+// -- Fetch -----------------------------------------------------
 $stmt = $pdo->prepare('SELECT * FROM qualifications WHERE user_id=? ORDER BY graduation_year DESC');
 $stmt->execute([$userId]);
 $qualifications = $stmt->fetchAll();
@@ -113,7 +113,7 @@ $currentYear    = (int)date('Y');
                                     <td><strong><?= e($q['degree']) ?></strong></td>
                                     <td><?= e($q['university']) ?></td>
                                     <td><span class="badge bg-primary-subtle text-primary"><?= e($q['graduation_year']) ?></span></td>
-                                    <td><?= $q['certification'] ? e($q['certification']) : '<span class="text-muted">—</span>' ?></td>
+                                    <td><?= $q['certification'] ? e($q['certification']) : '<span class="text-muted">-</span>' ?></td>
                                     <td class="text-end">
                                         <button class="btn btn-sm btn-outline-secondary me-1"
                                                 onclick="openEdit(<?= htmlspecialchars(json_encode($q), ENT_QUOTES) ?>)">

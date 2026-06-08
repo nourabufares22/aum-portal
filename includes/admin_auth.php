@@ -1,5 +1,5 @@
-<?php
-// ── Admin Authentication & CSRF helpers ───────────────────────
+﻿<?php
+// -- Admin Authentication & CSRF helpers -----------------------
 // Always loaded AFTER config/db.php and includes/auth.php
 
 function requireAdmin(): void {
@@ -8,7 +8,7 @@ function requireAdmin(): void {
         exit;
     }
     if (($_SESSION['user_role'] ?? '') !== 'admin') {
-        // Logged in but not admin — send back to staff portal
+        // Logged in but not admin - send back to staff portal
         setFlash('error', 'Access denied. Admin privileges required.');
         header('Location: ' . BASE_URL . '/staff/dashboard.php');
         exit;
@@ -19,7 +19,7 @@ function getAdminId(): int {
     return (int)($_SESSION['user_id'] ?? 0);
 }
 
-// ── CSRF ─────────────────────────────────────────────────────
+// -- CSRF -----------------------------------------------------
 
 function csrfToken(): string {
     if (empty($_SESSION['csrf_token'])) {
@@ -28,7 +28,7 @@ function csrfToken(): string {
     return $_SESSION['csrf_token'];
 }
 
-/** Emit a hidden CSRF field — call inside every POST form */
+/** Emit a hidden CSRF field - call inside every POST form */
 function csrfField(): string {
     return '<input type="hidden" name="csrf_token" value="'
          . htmlspecialchars(csrfToken(), ENT_QUOTES, 'UTF-8') . '">';
@@ -44,7 +44,7 @@ function verifyCsrf(): void {
     }
 }
 
-// ── Status helpers ────────────────────────────────────────────
+// -- Status helpers --------------------------------------------
 
 const APP_STATUSES = ['pending','under_review','accepted','rejected'];
 
